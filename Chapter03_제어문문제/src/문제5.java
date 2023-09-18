@@ -8,13 +8,13 @@ public class 문제5 {
 		System.out.print("점수 입력:");
 		int score=sc.nextInt();
 		
-		if(score>=90&&score<=100)
+		if(score>=90)
 			System.out.println("A학점입니다");
-		else if(score>=80&&score<=89)
+		else if(score>=80)
 			System.out.println("B학점입니다");
-		else if(score>=70&&score<=79)
+		else if(score>=70)
 			System.out.println("C학점입니다");
-		else if(score>=60&&score<=69)
+		else if(score>=60)
 			System.out.println("D학점입니다");
 		else if(score<60)
 			System.out.println("F학점입니다");
