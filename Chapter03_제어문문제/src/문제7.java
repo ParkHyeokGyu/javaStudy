@@ -25,13 +25,11 @@ public class 문제7 {
 			System.out.println(num1+" * "+num2+" = "+(num1*num2));
 			break;
 		case '/':
-			if(num2==0) {
+			if(num2==0)
 				System.out.println("0으로 나눌 수 없습니다");
-				break;
-			}else {
+			else
 				System.out.println(num1+" / "+num2+" = "+(num1/num2));
-				break;
-			}
+			break;
 		default:
 			System.out.println("잘못된 연산자 입니다");
 		}
