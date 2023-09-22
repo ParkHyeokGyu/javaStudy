@@ -112,8 +112,5 @@ public class 문제 {
 //		Arrays.sort(arr7);
 //		for(int i:arr7)
 //			System.out.print(i+"\t");
-		for(int i=0;i<arr7.length;i++) {
-			for(int j=i+1;j)
-		}
 	}
 }
