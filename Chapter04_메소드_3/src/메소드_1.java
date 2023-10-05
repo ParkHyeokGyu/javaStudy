@@ -83,14 +83,153 @@
 			main() => 프로그램의 시작과 종료
 		
 		3. 메소드 유형
-			리턴형	매개변수
- 			 O		  O
- 			 O		  X
- 			 X		  O
- 			 X		  X
+			리턴형	매개변수	메소드 원형
+ 			 O		  O		String substring(int begin)
+ 			 O		  X		String trim(),double random()
+ 			 X		  O		void main(String[] args)
+ 			 X		  X		void println()
+ 			 
+ 			 한개의 클래스 안에서 메소드명이 동일할 수 있다
+ 			 				----------
+ 			 					|
+ 			 				매개변수의 갯수나 데이터형이 다르다
+ 			 				aaa(int a)
+ 			 				aaa(double d)
+ 			 				aaa(int a,int b) => overloading(중복 정의 메소드)
+ 		
+ 		4. 메소드 호출
+ 			인스턴스 메소드 => new를 이용해서 메모리에 저장
+	 			Scanner sc=new Scanner(System.in);
+	 			sc.nextInt();
+	 			String s="";
+	 			s.trim();
+ 			클래스 메소드(static) => 공유 => 자동 저장
+ 				Math.random();
+ 				
+ 			static
+ 			클래스명.메소드명()
+ 				같은 클래스인 경우 => 클래스명 생략 가능
+ 				다른 클래스인 경우 => 클래스명 생략 불가
+ 		
+ 		5. return값 설정
+ 			int display(){		double display(){		String display(){
+ 				return 10;			return 10.5;			return "";
+ 			}					}						}
+ 			void display(){		int[] display(){
+ 				return;(생략가능)		return int[];
+ 			}					}
+ 		
+ 		6. 메소드 사용 목적
+ 			반복되는 기능 제거
+ 			코드관리 용이(기능별 분리)
+ 			소스가 간결하다
+ 			재사용성이 좋다(다른 클래스에서 사용)
+ 			
  */
+// 5개의 정수를 전송 => 정렬한다 int[]
+// 5자리 정수를 전송 => 거꾸로 출력 12345 => 54321
+import java.util.Arrays;
+
 public class 메소드_1 {
-	public static void main(String[] args) {
+//	static int[] sortASC(int[] arr) {
+//		for(int i=0;i<arr.length-1;i++) {
+//			for(int j=i+1;j<arr.length;j++) {
+//				if(arr[i]>arr[j]) {
+//					int temp=arr[i];
+//					arr[i]=arr[j];
+//					arr[j]=temp;
+//				}
+//			}
+//		}
+//		return arr;
+//	}
+//	static int[] sortDESC(int[] arr) {
+//		for(int i=0;i<arr.length-1;i++) {
+//			for(int j=i+1;j<arr.length;j++) {
+//				if(arr[i]<arr[j]) {
+//					int temp=arr[i];
+//					arr[i]=arr[j];
+//					arr[j]=temp;
+//				}
+//			}
+//		}
+//		return arr;
+//	}
+	static int[] sort(int[] arr,String type) {
+		boolean bCheck=false;
+		for(int i=0;i<arr.length-1;i++) {
+			for(int j=i+1;j<arr.length;j++) {
+				if(type.equals("ASC")) {
+					bCheck=arr[i]>arr[j];
+				}else {
+					bCheck=arr[i]<arr[j];
+				}
+				if(bCheck) {
+					int temp=arr[i];
+					arr[i]=arr[j];
+					arr[j]=temp;
+				}
+			}
+		}
+		return arr;
+	}
+	// Call By Reference : 리턴형 없이, 값을 넘겨받을 변수 없이 메소드 내에서 처리
+	static void sort_1(int[] arr,String type) {
+		boolean bCheck=false;
+		for(int i=0;i<arr.length-1;i++) {
+			for(int j=i+1;j<arr.length;j++) {
+				if(type.equals("ASC")) {
+					bCheck=arr[i]>arr[j];
+				}else {
+					bCheck=arr[i]<arr[j];
+				}
+				if(bCheck) {
+					int temp=arr[i];
+					arr[i]=arr[j];
+					arr[j]=temp;
+				}
+			}
+		}
+	}
+	static String reverse(int n) {
+		String result="";
+		String nStr=String.valueOf(n);
+		for(int i=nStr.length()-1;i>=0;i--) {
+			result+=nStr.charAt(i);
+		}
+		return result;
+	}
+//	static int reverse(int n) {
+//		String result="";
+//		String nStr=String.valueOf(n);
+//		for(int i=nStr.length()-1;i>=0;i--) {
+//			result+=nStr.charAt(i);
+//		}
+//		return Integer.parseInt(result); // 정수n의 마지막 자리가 0일경우는 String으로 넘겨야한다
+//	}
+	static void process() {
+		int[] arr=new int[5];
+		for(int i=0;i<arr.length;i++) {
+			arr[i]=(int)(Math.random()*100)+1;
+		}
+		System.out.print("정렬전:");
+		System.out.println(Arrays.toString(arr));
+//		int[] result=sortASC(arr);
+//		System.out.println(Arrays.toString(result));
+//		result=sortDESC(arr);
+//		System.out.println(Arrays.toString(result));
+//		int[] result=sort(arr, "ASC");
+//		System.out.println(Arrays.toString(result));
+//		result=sort(arr, "DESC");
+//		System.out.println(Arrays.toString(result));
+		sort_1(arr, "ASC");
+		System.out.println(Arrays.toString(arr));
+		sort_1(arr, "DESC");
+		System.out.println(Arrays.toString(arr));
 		
+		System.out.println(reverse(123));
+	}
+	public static void main(String[] args) {
+		process();
 	}
 }
