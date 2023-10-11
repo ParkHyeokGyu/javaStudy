@@ -3,7 +3,7 @@ import java.util.*; // Scanner
 import java.io.*; // 입출력(파일)
 // 일반 데이터형
 class Music{
-	String rank;
+	int rank;
 	String title;
 	String singer;
 	String album;
@@ -34,14 +34,16 @@ class MusicData{
 				String[] ss=s.split("\\|");
 				musics[i]=new Music();
 				if(ss[0].equals("47")) continue;
-				musics[i].rank=ss[0];
+				try {
+					musics[i].rank=Integer.parseInt(ss[0]);
+				} catch (Exception e) {}
 				musics[i].title=ss[1];
 				musics[i].singer=ss[2];
 				musics[i].album=ss[3];
 				musics[i].key=ss[4];
 				i++;
 			}
-		} catch (Exception e) {}
+		} catch (Exception e) {} 
 	}
 }
 // 제어
