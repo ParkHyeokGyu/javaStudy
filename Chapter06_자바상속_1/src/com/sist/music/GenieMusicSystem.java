@@ -1,7 +1,10 @@
 package com.sist.music;
 
+import java.util.Scanner;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 /*
  	GenieMusicSystem
  			|
@@ -65,6 +68,78 @@ public class GenieMusicSystem {
 			 	<table id="aaa"> => table#aaa
 			 	<table class="bbb"> => table.bbb
 			 */
+			// 노래 제목
+			Elements title=doc.select("table.list-wrap td.info a.title");
+			// 가수명
+			Elements singer=doc.select("table.list-wrap td.info a.artist");
+			// 앨범
+			Elements album=doc.select("table.list-wrap td.info a.albumtitle");
+			
+			for(int i=0;i<musics.length;i++) {
+				musics[i]=new Music();
+				musics[i].setMno(i+1);
+				musics[i].setTitle(title.get(i).text());
+				musics[i].setSinger(singer.get(i).text());
+				musics[i].setAlbum(album.get(i).text());
+			}
 		} catch (Exception e) {}
 	}
+	
+	public Music[] musicAllData() {
+		return musics;
+	}
+	// 제목으로 찾기
+	public Music[] musicTitleFindData(String title) {
+		int count=0;
+		for(Music mm:musics) {
+			if(mm.getTitle().contains(title)) {
+				count++;
+			}
+		}
+		Music[] music=new Music[count];
+		int i=0;
+		for(Music m:musics) {
+			if(m.getTitle().contains(title)) {
+				music[i]=m;
+				i++;
+			}
+		}
+		return music;
+	}
+	// 가수명으로 찾기
+	public Music[] musicSingerFindData(String singer) {
+		int count=0;
+		for(Music mm:musics) {
+			if(mm.getSinger().contains(singer)) {
+				count++;
+			}
+		}
+		// 배열의 단점 => 고정
+		// 가변형 => 컬렉션
+		Music[] music=new Music[count];
+		int i=0;
+		for(Music m:musics) {
+			if(m.getSinger().contains(singer)) {
+				music[i]=m;
+				i++;
+			}
+		}
+		return music;
+	}
+	// 상세보기
+	public Music musicDetailData(int mno) {
+		return musics[mno-1];
+	}
+	
+//	public static void main(String[] args) {
+//		Scanner sc=new Scanner(System.in);
+//		System.out.print("가수명 입력:");
+//		String singer=sc.next();
+//		GenieMusicSystem gm=new GenieMusicSystem();
+//		Music[] music=gm.musicSingerFindData(singer);
+//		System.out.println("검색 결과:"+music.length+"건");
+//		for(Music m:music) {
+//			System.out.println(m.getMno()+"."+m.getTitle());
+//		}
+//	}
 }
